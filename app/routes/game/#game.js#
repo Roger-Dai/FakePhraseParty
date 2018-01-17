@@ -52,6 +52,16 @@ class Game extends Component {
     render() {
         return(
             <View style={styles.container} >
+                <CountdownCircle
+                    seconds={this.props.timeLimit}
+                    radius={30}
+                    borderWidth={8}
+                    color="#ff003f"
+                    bgColor="#fff"
+                    textStyle={{ fontSize: 20 }}
+                    onTimeElapsed={this._next}
+                    updateText={this._updateText}
+                />
                 <TextBox
                     style={[styles.textBoxContainer, { width: '100%', height: '100%', backgroundColor: 'white'}]}
                     onPress={this._onPress}
