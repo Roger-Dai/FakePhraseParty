@@ -4,7 +4,7 @@ import { Router, Scene, Actions, ActionConst } from 'react-native-router-flux';
 import {connect} from 'dva-no-router';
 import styles from '../style';
 import TextBox from '../../components/textBox';
-import CountdownCircle from 'react-native-countdown-circle';
+import CountdownCircle from '../../components/react-native-countdown-circle/src/index';
 
 
 class Game extends Component {
@@ -39,19 +39,18 @@ class Game extends Component {
         Actions.score();
     }
 
-    _updateText=(elapsedSecs, totalSecs) => {
-        this.props.dispatch({
-            type: 'categories/tick',
-            timeLimit: this.props.timeLimit - 1,
-        })
-        return (
-            (totalSecs - elapsedSecs).toString()
-        )
-    }
-
     render() {
-        return(
+        return( 
             <View style={styles.container} >
+                <CountdownCircle
+                    seconds={this.props.timeLimit}
+                    radius={30}
+                    borderWidth={8}
+                    color="#ff003f"
+                    bgColor="#fff"
+                    textStyle={{ fontSize: 20 }}
+                    onTimeElapsed={() => {console.log('Finished!')}}
+                />
                 <TextBox
                     style={[styles.textBoxContainer, { width: '100%', height: '100%', backgroundColor: 'white'}]}
                     onPress={this._onPress}
