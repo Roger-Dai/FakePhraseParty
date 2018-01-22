@@ -25,7 +25,6 @@
     "expo": "^23.0.4",
     "react": "16.0.0",
     "react-native": "0.50.3",
-    "react-native-countdown-circle": "^2.0.0",
     "react-native-router-flux": "^4.0.0-beta.24",
     "shuffle-array": "^1.0.1"
   }

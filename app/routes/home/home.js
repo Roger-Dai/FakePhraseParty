@@ -27,10 +27,13 @@ class Home extends Component {
   }
 
   enterName=() => {
-    this.props.teamNames.push(this.props.msg);
+    var tempTeam = [];
+    tempTeam.push(this.props.msg);
+    tempTeam.push(0);
+    this.props.teams.push(tempTeam);
     this.props.dispatch({
       type: 'home/enterName',
-      teamNames: this.props.teamNames,
+      teams: this.props.teams,
     })
   }
 
@@ -50,9 +53,6 @@ class Home extends Component {
 			  </View>
       )
     }
-
-    console.log(this.props.msg)
-    console.log(this.props.teamNames)
 
     return (
       <View style={styles.container} >
@@ -89,7 +89,7 @@ const mapStateToProps = state => {
     return {
       numTeams: state.home.numTeams,
       msg: state.home.msg,
-      teamNames: state.home.teamNames,
+      teams: state.home.teams,
     };
 }
 

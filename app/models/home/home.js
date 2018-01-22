@@ -4,7 +4,7 @@ export default {
  namespace: 'home',
  state: {
      numTeams: 2,
-     teamNames: [],
+     teams: [],
      msg: '',
  },
 
@@ -21,8 +21,8 @@ export default {
     textChange(state, {msg}) {
         return { ...state, msg };
     },
-    enterName(state, {teamNames}) {
-        return { ...state, teamNames };
+    enterName(state, {teams}) {
+        return { ...state, teams};
     },
  } 
 };

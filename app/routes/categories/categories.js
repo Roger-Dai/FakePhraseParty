@@ -27,6 +27,7 @@ class Categories extends Component {
     }
 
     render() {
+        console.log('MAP -------> ', this.props.teams);
         return (
             <View style={[styles.container, {justifyContent: 'flex-start'}]} >
                 <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 20, flex: 1}} >
@@ -72,7 +73,7 @@ class Categories extends Component {
                     </Picker>
                 </View>
                 <View style={{flex: 1}} >
-                    <Text style={styles.label} >Each round is {this.props.timeLimit} seconds!</Text>
+                <Text style={styles.label} >Each round is {this.props.timeLimit} seconds! {this.props.teams[this.props.teamIndex][0]} will be starting first.</Text>
                 </View>
                 <View style={{alignItems: 'center', flex:1, margin:10}}>
                     <TextBox
@@ -92,6 +93,8 @@ const mapStateToProps = state => {
     return {
         category: state.categories.category,
         timeLimit: state.categories.timeLimit,
+        teamIndex: state.categories.teamIndex,
+        teams: state.home.teams,
     };
 }
 

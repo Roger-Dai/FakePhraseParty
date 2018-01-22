@@ -3,6 +3,7 @@ export default {
     namespace: 'game',
     state: {
         index: 0,
+        gameList: [],
     },
    
     subscriptions: {
@@ -15,9 +16,8 @@ export default {
         next(state, { index }) {
             return { ...state, index };
         },
-        tick(state, { timeLimit }) {
-            console.log('tick')
-            return { ...state, timeLimit};
+        list(state, { gameList }) {
+            return { ...state, gameList};
         }
     } 
    };

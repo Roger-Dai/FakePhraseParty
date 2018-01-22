@@ -5,6 +5,7 @@ export default {
     state: {
         category: 'Easy',
         timeLimit: 30,
+        teamIndex: 0,
     },
    
     subscriptions: {
@@ -20,8 +21,8 @@ export default {
         timeChange(state, {timeLimit}) {
             return {...state, timeLimit};
         },
-        tick(state, { timeLimit }) {
-            return { ...state, timeLimit };
-        },
+        updateIndex(state, {teamIndex}) {
+            return {...state, teamIndex};
+        }
     } 
    };

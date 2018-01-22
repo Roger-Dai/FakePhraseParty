@@ -10,23 +10,26 @@ import CountdownCircle from '../../components/react-native-countdown-circle/src/
 class Game extends Component {
 
     componentWillMount(){
-        global.duration = this.props.timeLimit;
+        var temp = [];
         if(this.props.category === 'Food'){
-            global.gameList = this.props.food.split(', ');
+            temp = this.props.food.split(', ');
         } else if (this.props.category === 'Celebrities'){
-            global.gameList = this.props.celebrities.split(', ');
+            temp = this.props.celebrities.split(', ');
         } else if (this.props.category === 'Hard'){
-            global.gameList = this.props.hard.split(', ');
+            temp = this.props.hard.split(', ');
         } else if (this.props.category === 'Easy'){
-            global.gameList = this.props.easy.split(', ');
+            temp = this.props.easy.split(', ');
         }
         const shuffle = require('shuffle-array');
-        shuffle(gameList);
-        
+        shuffle(this.props.gameList);
+        this.props.dispatch({
+            type: 'game/list',
+            gameList: temp,
+        })
     }
-
+    
     _onPress=() => {
-        if(this.props.index + 1 >= gameList.length){
+        if(this.props.index + 1 >= this.props.gameList.length){
             alert('You have reached the end of the category!')
         }
         this.props.dispatch({
@@ -35,8 +38,8 @@ class Game extends Component {
         })
     }
 
-    _next=() => {
-        Actions.score();
+    _score=() => {
+        Actions.score()
     }
 
     render() {
@@ -49,13 +52,20 @@ class Game extends Component {
                     color="#ff003f"
                     bgColor="#fff"
                     textStyle={{ fontSize: 20 }}
-                    onTimeElapsed={() => {console.log('Finished!')}}
+                    onTimeElapsed={() => {Actions.score()}}
                 />
                 <TextBox
-                    style={[styles.textBoxContainer, { width: '100%', height: '100%', backgroundColor: 'white'}]}
+                    style={[styles.textBoxContainer, { width: '100%', height: '85%', backgroundColor: 'white'}]}
                     onPress={this._onPress}
-                    text={gameList[this.props.index]}
+                    text={this.props.gameList[this.props.index]}
                     underlayColor='white'
+                />
+                <TextBox
+                    style={styles.textBoxContainer}
+                    onPress={this._score}
+                    text='Score'
+                    textColor='white'
+                    underlayColor='darkblue'
                 />
             </View>
         )
@@ -71,6 +81,7 @@ const mapStateToProps = state => {
         celebrities: state.dictionaries.celebrities,
         hard: state.dictionaries.hard,
         easy: state.dictionaries.easy,
+        gameList: state.game.gameList,
     };
 }
 
